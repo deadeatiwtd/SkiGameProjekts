@@ -14,7 +14,16 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
- 
+    private void OnEnable()
+    {
+        Obstacle.OnPlayerHit += TakeDamage;
+    }
+    
+    void TakeDamage()
+    {
+        Debug.Log("Player damaged");
+    }
+    
     void FixedUpdate()
     {
         grounded = Physics.Linecast(transform.position, transform.position + Vector3.down, groundMask);
