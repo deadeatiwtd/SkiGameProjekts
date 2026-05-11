@@ -33,8 +33,9 @@ public class GameManager : MonoBehaviour
         else
         {
             bestTime = new TimeSpan(int.MaxValue);
-            bestTimeText.text = "Best Time: 00:00:00";
+            bestTimeText.text = "Best Time: 00:00";
         }
+        PlayerPrefs.DeleteKey(bestTimeKey);
 
         Debug.Log("best time: " + bestTime.ToString());
     }
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         if (raceTime < bestTime)
         {
             bestTime = raceTime;
+            bestTimeText.text = "Best Time: ;" + bestTime.ToString("ss\\:ff");
             PlayerPrefs.SetInt(bestTimeKey,(int) bestTime.Ticks);
             PlayerPrefs.Save();
         }
