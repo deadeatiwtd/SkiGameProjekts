@@ -7,17 +7,36 @@ public class GameManager : MonoBehaviour
     private TimeSpan raceTime;
     private TimeSpan penaltyTime;
     private bool racing = false;
+    private TimeSpan bestTime;
 
     public delegate void TimeEvent();
     
     [SerializeField] int penaltyTimeVal = 3;
-    [SerializeField] private TMP_Text raceTimeText;
+    [SerializeField] private TMP_Text raceTimeText, bestTimeText;
+    [SerializeField] private string bestTimeKey = "LVLBestTime";
 
     private void OnEnable()
     {
         StartGate.StartRace += OnRaceStart;
         FinishGate.FinishRace += OnRaceFinish;
         SlalonFlag.RacePenalty += AddRacePenalty;
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey(bestTimeKey))
+        {
+            int bestTimeTicks = PlayerPrefs.GetInt(bestTimeKey);
+            bestTime = new TimeSpan(bestTimeTicks);
+            bestTimeText.text = "Best Time: " + bestTime.ToString("ss\\:ff");
+        }
+        else
+        {
+            bestTime = new TimeSpan(int.MaxValue);
+            bestTimeText.text = "Best Time: 00:00:00";
+        }
+
+        Debug.Log("best time: " + bestTime.ToString());
     }
 
     void AddRacePenalty()
@@ -28,13 +47,18 @@ public class GameManager : MonoBehaviour
     {
         racing = true;
         raceStart = DateTime.Now;
-        Debug.Log("Race Start");
+        
     }
 
     void OnRaceFinish()
     {
         racing = false;
-        Debug.Log("Race Finish");
+        if (raceTime < bestTime)
+        {
+            bestTime = raceTime;
+            PlayerPrefs.SetInt(bestTimeKey,(int) bestTime.Ticks);
+            PlayerPrefs.Save();
+        }
     }
 
     private void Update()

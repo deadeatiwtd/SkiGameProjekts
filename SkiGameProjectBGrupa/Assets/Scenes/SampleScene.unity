@@ -1845,6 +1845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   penaltyTimeVal: 3
   raceTimeText: {fileID: 0}
+  bestTimeKey: LVLBestTime
 --- !u!65 &1557695670
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1914,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   penaltyTimeVal: 3
   raceTimeText: {fileID: 1588390641}
+  bestTimeKey: LVLBestTime
 --- !u!4 &1585156442
 Transform:
   m_ObjectHideFlags: 0
@@ -1986,7 +1988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'time : 1:30'
+  m_text: 'time : 0:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d973c887764e0047869cae0e40e27e5, type: 2}
   m_sharedMaterial: {fileID: 4463983791572555941, guid: 3d973c887764e0047869cae0e40e27e5, type: 2}
