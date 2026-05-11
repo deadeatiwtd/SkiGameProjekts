@@ -4,9 +4,10 @@ public class GameManager : MonoBehaviour
 {
     private DateTime raceStart;
     private TimeSpan raceTime;
+    private TimeSpan penaltyTime;
     private bool racing = false;
 
-    private delegate void TimeEvent();
+    public delegate void TimeEvent();
     
     [SerializeField] int penaltyTimeVal = 3;
 
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         StartGate.StartRace += OnRaceStart;
         FinishGate.FinishRace += OnRaceFinish;
-        SlalomFlag.RacePenalty += AddRacePenalty;
+        SlalonFlag.RacePenalty += AddRacePenalty;
     }
 
     void AddRacePenalty()

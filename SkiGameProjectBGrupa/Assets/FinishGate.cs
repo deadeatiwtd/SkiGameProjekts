@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FinishGate : MonoBehaviour
 {
-    public static event GameManager.TimerEvent FinishRace;
+    public static event GameManager.TimeEvent FinishRace;
 
     private void OnTriggerEnter(Collider other)
     {

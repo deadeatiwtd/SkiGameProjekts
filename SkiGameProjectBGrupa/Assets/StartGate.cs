@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StartGate : MonoBehaviour
 {
-    public static event GameManager.TimerEvent StartRace;
+    public static event GameManager.TimeEvent StartRace;
 
     private void OnTriggerEnter(Collider other)
     {
