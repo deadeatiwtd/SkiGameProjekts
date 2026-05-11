@@ -5,15 +5,22 @@ public class GameManager : MonoBehaviour
     private DateTime raceStart;
     private TimeSpan raceTime;
     private bool racing = false;
+
+    private delegate void TimeEvent();
     
-    public delegate void TimerEvent();
+    [SerializeField] int penaltyTimeVal = 3;
 
     private void OnEnable()
     {
         StartGate.StartRace += OnRaceStart;
         FinishGate.FinishRace += OnRaceFinish;
+        SlalomFlag.RacePenalty += AddRacePenalty;
     }
 
+    void AddRacePenalty()
+    {
+        penaltyTime += new TimeSpan(0,0,penaltyTimeVal);
+    }
     void OnRaceStart()
     {
         racing = true;
@@ -31,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         if (racing)
         {
-            raceTime = DateTime.Now - raceStart;
+            raceTime = DateTime.Now - raceStart + penaltyTime;
             Debug.Log("Race time " + raceTime);
         }
     }
