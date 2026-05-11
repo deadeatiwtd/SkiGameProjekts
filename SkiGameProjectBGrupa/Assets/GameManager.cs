@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     private DateTime raceStart;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public delegate void TimeEvent();
     
     [SerializeField] int penaltyTimeVal = 3;
+    [SerializeField] private TMP_Text raceTimeText;
 
     private void OnEnable()
     {
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         {
             raceTime = DateTime.Now - raceStart + penaltyTime;
             Debug.Log("Race time " + raceTime);
+            raceTimeText.text = "Time: " + raceTime.ToString("ss\\:ff");
         }
     }
 }
